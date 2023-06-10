@@ -11,39 +11,41 @@ interface CommandLineArgs {
   $0: string;
 }
 
+export function parseArgs() {
 
+  const argv = yargs(hideBin(process.argv))
+      .option('s', {
+        alias: 'symbols',
+        description: 'Symbols to target',
+        type: 'array',
+      })
+      .option('r', {
+        alias: 'regex',
+        description: 'Regex to target',
+        type: 'array',
+      })
+      .option('o', {
+        alias: 'oldModule',
+        description: 'Old module name',
+        type: 'string',
+      })
+      .option('n', {
+        alias: 'newModule',
+        description: 'New module name',
+        type: 'string',
+      })
+      .demandOption(['s', 'o', 'n'], 'Please provide all arguments to work with this tool')
+      .help()
+      .argv as unknown as CommandLineArgs;
 
-const argv = yargs(hideBin(process.argv))
-    .option('s', {
-      alias: 'symbols',
-      description: 'Symbols to target',
-      type: 'array',
-    })
-    .option('r', {
-      alias: 'regex',
-      description: 'Regex to target',
-      type: 'array',
-    })
-    .option('o', {
-      alias: 'oldModule',
-      description: 'Old module name',
-      type: 'string',
-    })
-    .option('n', {
-      alias: 'newModule',
-      description: 'New module name',
-      type: 'string',
-    })
-    .demandOption(['s', 'o', 'n'], 'Please provide all arguments to work with this tool')
-    .help()
-    .argv as unknown as CommandLineArgs;
+  const args: TransformerOptions = {
+    targetSymbols: argv?.s ?? [],
+    targetRegex: argv.r?.map((regex) => new RegExp(regex)) ?? [],
+    oldModuleName: argv.o,
+    newModuleName: argv.n,
+    directory: argv._[0] as string,
+  }
 
-
-export const args:TransformerOptions = {
-  targetSymbols: argv?.s ?? [],
-  targetRegex: argv.r?.map((regex) => new RegExp(regex)) ?? [],
-  oldModuleName: argv.o,
-  newModuleName: argv.n,
-  directory: argv._[0] as string,
+  return args;
 }
 

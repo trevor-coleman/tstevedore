@@ -32,9 +32,10 @@ function parseAST(sourceCode: string): any {
 export function transformAndPrint(
     filename: string,
     {targetSymbols, targetRegex, oldModuleName, newModuleName}: TransformerOptions,
+    makeChanges: boolean,
 ) {
   let newImportPaths: Array<{ path: NodePath, node: namedTypes.ImportDeclaration }> = [];
-  console.log(`Transforming ${filename}`);
+  console.log(`Checking ${filename}`);
   const sourceCode: string = readFileSync(filename, 'utf-8');
 
   let ast: any;
@@ -160,6 +161,11 @@ export function transformAndPrint(
       config: configPath,
     });
     const formattedCode = format(output, {...config, parser: 'typescript'});
-    writeFileSync(filename, formattedCode);
+    if(makeChanges) {
+      writeFileSync(filename, formattedCode);
+    } else {
+      console.log(filename);
+      console.log(formattedCode);
+    }
   }
 }
