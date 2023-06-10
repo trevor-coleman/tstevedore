@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { parseArgs } from './args'
 import { glob } from 'glob'
 import { transformAndPrint } from './parse'

@@ -27,7 +27,7 @@ npx tstevedore
 
 ### Command Line Interface
 
-To run TStevedore with command-line arguments, use:
+TStevedore is meant to be run interactively with the `npx tstevedore` To run TStevedore with command-line arguments, use:
 
 ```sh
 npx tstevedore --symbols [symbols] --oldModule [oldModule] --newModule [newModule]
