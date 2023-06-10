@@ -32,8 +32,7 @@ npx tstevedore
 TStevedore is meant to be run interactively with the `npx tstevedore` To run TStevedore with command-line arguments, use:
 
 ```sh
-npx stevedore --identifiers [identifiers] --oldModule [oldModule] --newModule [newModule] --regex [regex]
---directory [directory] --ignoreNodeModules
+npx stevedore -i [identifiers] -r [regex expressions] -o [oldModule] -n [newModule] -d [directory] 
 ```
 
 Arguments:
