@@ -1,10 +1,12 @@
 # TStevedore
 
-TStevedore is a utility that automates the task of changing imports from one module to be from another module. It
-provides a straightforward API and an interactive prompt for ease of use.
+TStevedore is a utility that automates the task of changing typescript imports from one module to be from another module. 
+It provides a straightforward API and an interactive prompt for ease of use.
 
 For example if you have a module `my-utils` that exports a function `myFunction`, but you decide to create a new module
 `my-functions` that exports the same function, you can use TStevedore to change all imports of `my-utils` to `my-functions`.
+
+Outputs are prettier-formatted.
 
 **Before:**
 ```
