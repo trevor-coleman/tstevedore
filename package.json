@@ -13,7 +13,6 @@
     "build": "tsc",
     "ci": "tsc"
   },
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
