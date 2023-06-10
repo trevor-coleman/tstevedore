@@ -172,7 +172,9 @@ export async function transformAndPrint(
 
     const output = recast.print(ast).code;
     const config = await prettier.resolveConfig.sync(filename);
-    console.log(`using prettier config: ${JSON.stringify(config)}`);
+    console.log(
+      `using prettier config: ${JSON.stringify(config)} for file ${filename}`
+    );
     const formattedCode = prettier.format(output, {
       ...config,
       parser: "typescript",

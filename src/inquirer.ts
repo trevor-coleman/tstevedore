@@ -1,4 +1,4 @@
-import { input, confirm } from "@inquirer/prompts";
+import { confirm, input } from "@inquirer/prompts";
 import { TransformerOptions } from "./types/TransformerOptions";
 import fs from "fs";
 
@@ -70,12 +70,10 @@ async function getModuleName(message: string): Promise<any> {
 }
 
 async function getPath(): Promise<string> {
-  const path = await input({
+  return await input({
     message: "What is the path to the directory you want to target?",
     validate: isValidDirectory,
   });
-
-  return path;
 }
 
 /**
