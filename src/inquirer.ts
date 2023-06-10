@@ -8,23 +8,14 @@ const RESET = '\x1b[0m';
 const BRIGHT_WHITE = '\x1b[97m';
 const BRIGHT_BLUE_BG_WHITE_TEXT = '\x1b[44m\x1b[97m';
 
-async function getPath(): Promise<string> {
 
-    const path = await input({
-        message: 'What is the path to the directory you want to target?',
-        validate: isValidDirectory,
-    });
 
-    return path;
-}
+const WELCOME: string = `
+${BRIGHT_BLUE_BG_WHITE_TEXT}TS${BRIGHT_WHITE}tevedore${RESET}: the TypeScript import refactoring tool!
+`;
 
 export async function inquirerPrompt():Promise<TransformerOptions> {
-
-
-
-   console.log(`
-  ${BRIGHT_BLUE_BG_WHITE_TEXT}TS${RESET}tevedore: the TypeScript import refactoring tool!
-`);
+   console.log(WELCOME);
 
 
 
@@ -35,12 +26,19 @@ export async function inquirerPrompt():Promise<TransformerOptions> {
        'What is the name of the NEW module the identifiers should be exported from?');
    const directory = await getPath()
 
+   const shouldIgnoreNodeModules = await confirm({
+      message: 'Ignore \`node_modules/**\`?',
+      default: true,
+    });
+
+
    return {
       targetSymbols: identifiers,
       oldModuleName,
       newModuleName,
       directory,
-   };
+      ignore: shouldIgnoreNodeModules ? ['**/node_modules/**'] : undefined,
+   }
 }
 
 async function getIdentifiers(): Promise<any> {
@@ -56,7 +54,7 @@ async function getModuleName(message:string): Promise<any> {
    let oldModuleNameInput = await input({
       message,
       validate: (value) => {
-         return isValidIdentifier(value) ? true : 'Invalid module name';
+         return isValidModuleImportPath(value) ? true : 'Invalid module name';
       },
    });
 
@@ -72,6 +70,16 @@ async function getModuleName(message:string): Promise<any> {
    }
 
    return oldModuleNameInput;
+}
+
+async function getPath(): Promise<string> {
+
+   const path = await input({
+      message: 'What is the path to the directory you want to target?',
+      validate: isValidDirectory,
+   });
+
+   return path;
 }
 
 /**
@@ -174,7 +182,7 @@ function validateIdentifiers (value:string)  {
 
 
 function isValidModuleImportPath(importPath: string): boolean {
-   const moduleImportRegex = /^[a-zA-Z0-9_./-]+$/;
+   const moduleImportRegex = /^(@?[a-zA-Z0-9_./-]+)+$/;
    return moduleImportRegex.test(importPath);
 }
 

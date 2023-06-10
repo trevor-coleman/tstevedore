@@ -5,4 +5,5 @@ export interface TransformerOptions {
   oldModuleName: string;
   newModuleName: string;
   directory: string;
+  ignore?: string[];
 }

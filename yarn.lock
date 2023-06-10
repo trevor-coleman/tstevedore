@@ -406,6 +406,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/diff@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@types/diff@npm:5.0.3"
+  checksum: d8a7d4de12f1aba0bd0c17b0b0d1e45c83824d3d6cc65763fbad371cd8315361a7e16fbae3f260a83bfdf30cebe1c876b42cec4518698055bc430fb09db1cbc8
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^20.2.5":
   version: 20.2.5
   resolution: "@types/node@npm:20.2.5"
@@ -966,6 +973,13 @@ __metadata:
   version: 4.0.2
   resolution: "diff@npm:4.0.2"
   checksum: f2c09b0ce4e6b301c221addd83bf3f454c0bc00caa3dd837cf6c127d6edf7223aa2bbe3b688feea110b7f262adbfc845b757c44c8a9f8c0c5b15d8fa9ce9d20d
+  languageName: node
+  linkType: hard
+
+"diff@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "diff@npm:5.1.0"
+  checksum: c7bf0df7c9bfbe1cf8a678fd1b2137c4fb11be117a67bc18a0e03ae75105e8533dbfb1cda6b46beb3586ef5aed22143ef9d70713977d5fb1f9114e21455fba90
   languageName: node
   linkType: hard
 
@@ -3009,10 +3023,12 @@ __metadata:
   dependencies:
     "@babel/parser": ^7.22.4
     "@inquirer/prompts": ^2.1.1
+    "@types/diff": ^5.0.3
     "@types/node": ^20.2.5
     "@types/prettier": ^2.7.3
     "@types/yargs": ^17.0.24
     ast-types: ^0.14.2
+    diff: ^5.1.0
     eslint: ^8.42.0
     eslint-plugin-unicorn: ^47.0.0
     glob: ^10.2.6

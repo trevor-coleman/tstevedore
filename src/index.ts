@@ -19,7 +19,7 @@ async function main() {
     transformerOptions = await inquirerPrompt();
   }
 
-  files = await glob(`${transformerOptions.directory}/**/*.ts?(x)`);
+ files = await glob(`${transformerOptions.directory}/**/*.ts?(x)`, {ignore: transformerOptions.ignore});
 
   console.log(`
   Ready to begin? 

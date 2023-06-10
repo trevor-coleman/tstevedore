@@ -5,6 +5,7 @@ import { NodePath, namedTypes, builders } from 'ast-types';
 import { readFileSync, writeFileSync } from 'fs';
 import { resolveConfig, format } from 'prettier';
 import getBabelOptions from 'recast/parsers/_babel_options';
+import { printFileDiff } from './diff';
 
 const babelOptions = getBabelOptions();
 const parserOptions: ParserOptions = {
@@ -164,8 +165,8 @@ export function transformAndPrint(
     if(makeChanges) {
       writeFileSync(filename, formattedCode);
     } else {
-      console.log(filename);
-      console.log(formattedCode);
+      console.log(`\n\n${filename}:\n\n`);
+      printFileDiff(sourceCode, formattedCode);
     }
   }
 }
