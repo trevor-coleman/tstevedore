@@ -4,7 +4,7 @@ import { transformAndPrint } from "./parse";
 import * as process from "process";
 import { inquirerPrompt } from "./inquirer";
 import { TransformerOptions } from "./types/TransformerOptions";
-import { input, select } from "@inquirer/prompts";
+import { select } from "@inquirer/prompts";
 
 async function main() {
   let files: string[] = [];
