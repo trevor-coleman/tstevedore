@@ -1,6 +1,6 @@
 {
   "name": "tstevedore",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "./dist/index.js",
   "bin": "./dist/index.js",
   "files": [
@@ -16,6 +16,8 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": "https://github.com/trevor-coleman/tstevedore",
+  "author": "Trevor Coleman <trevor@trevorcoleman.design>",
   "dependencies": {
     "@babel/parser": "^7.22.4",
     "@inquirer/prompts": "^2.1.1",
