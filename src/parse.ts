@@ -3,7 +3,7 @@ import { parse, ParserOptions } from "@babel/parser";
 import { TransformerOptions } from "./types/TransformerOptions";
 import { NodePath, namedTypes, builders } from "ast-types";
 import { readFileSync, writeFileSync } from "fs";
-import { resolveConfig, format } from "prettier";
+import * as prettier from "prettier";
 import getBabelOptions from "recast/parsers/_babel_options";
 import { printFileDiff } from "./diff";
 
@@ -30,7 +30,7 @@ function parseAST(sourceCode: string): any {
   });
 }
 
-export function transformAndPrint(
+export async function transformAndPrint(
   filename: string,
   {
     targetSymbols,
@@ -171,11 +171,12 @@ export function transformAndPrint(
     });
 
     const output = recast.print(ast).code;
-    const configPath = "../../gas-buddy/app/.prettierrc.js";
-    const config = resolveConfig.sync(filename, {
-      config: configPath,
+    const config = await prettier.resolveConfig.sync(filename);
+    console.log(`using prettier config: ${JSON.stringify(config)}`);
+    const formattedCode = prettier.format(output, {
+      ...config,
+      parser: "typescript",
     });
-    const formattedCode = format(output, { ...config, parser: "typescript" });
     if (makeChanges) {
       writeFileSync(filename, formattedCode);
     } else {
